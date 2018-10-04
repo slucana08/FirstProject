@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         val prefs = this.getSharedPreferences("com.kotlin.application.firstproject", Context.MODE_PRIVATE)
 
         val list = mutableListOf<String>()
-        var storedNames = ""
+        var storedNames: String
 
         add_button.setOnClickListener{
             if (user_edit_text.text.toString() == ""){
