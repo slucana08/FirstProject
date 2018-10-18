@@ -1,6 +1,7 @@
 package com.kotlin.application.firstproject
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -13,7 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val prefs = this.getSharedPreferences("com.kotlin.application.firstproject", Context.MODE_PRIVATE)
+        val prefs : SharedPreferences? = this.getSharedPreferences("com.kotlin.application.firstproject", Context.MODE_PRIVATE)
 
         val list = mutableListOf<String>()
         var storedNames: String
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"Input user name",Toast.LENGTH_SHORT).show()
             } else {
                 var name = user_edit_text.text.toString()
-                if (prefs.contains("users")){
-                    storedNames = prefs.getString("users","Empty")
+                if (prefs!!.contains("users")){
+                    storedNames = prefs!!.getString("users","Empty")
                     var st = StringTokenizer(storedNames,",")
                     for (i in 1..st.countTokens()){
                         list.add(st.nextToken())
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         show_button.setOnClickListener{
             var users = "Empty"
-            if (prefs.contains("users")) {
+            if (prefs!!.contains("users")) {
                 storedNames = prefs.getString("users","Empty")
                 var st = StringTokenizer(storedNames,",")
                 for (i in 1..st.countTokens()){
